@@ -1,6 +1,6 @@
 # Authentication API 🚀
 
-Authentication API created with [Express](https://expressjs.com/pt-br/) + [Typescript](https://www.typescriptlang.org/) + [Mongoose](https://mongoosejs.com/). I used [JWT](https://jwt.io/) for session creation and protection of private routes, [Bcrypt](https://www.npmjs.com/package/bcrypt) for user password encryption.
+Authentication API created with [Express](https://expressjs.com/pt-br/), [Typescript](https://www.typescriptlang.org/) and [Mongoose](https://mongoosejs.com/). I used [JWT](https://jwt.io/) for session creation and protection of private routes, [Bcrypt](https://www.npmjs.com/package/bcrypt) for user password encryption.
 
 <br />
 
@@ -19,4 +19,4 @@ $ yarn install or npm install
 
 <br />
 
-_**Note:** Start the mongoDB image in the docker and create the dotenv with the environment variables found in the config folder_
+_**Note:** Start the mongoDB image in the docker and create the dotenv with the environment variables found in the config folder._
