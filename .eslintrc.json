@@ -22,6 +22,7 @@
     "import/extensions": "off",
     "new-cap": "off",
     "arrow-body-style": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "lines-between-class-members": "off"
   }
 }
