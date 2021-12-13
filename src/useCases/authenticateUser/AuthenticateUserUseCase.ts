@@ -1,7 +1,7 @@
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
-import User from '../../entities/user.entity';
+import User from '../../database/models/user.model';
 import { JWT_PASS } from '../../config';
 
 interface IAuthenticateUserRequest {

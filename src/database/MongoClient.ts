@@ -8,11 +8,6 @@ export class MongoClient {
   }
 
   async connect() {
-    await connect(MONGO_URL as string, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-    });
+    await connect(MONGO_URL as string);
   }
 }

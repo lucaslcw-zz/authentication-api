@@ -1,6 +1,6 @@
 import { hash } from 'bcryptjs';
 
-import User from '../../entities/user.entity';
+import User from '../../database/models/user.model';
 
 interface ICreateUserRequest {
   name: string;

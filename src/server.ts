@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 
-import { MongoClient } from './database/client';
+import { MongoClient } from './database/MongoClient';
 import { router } from './routes';
 import { PORT } from './config';
 

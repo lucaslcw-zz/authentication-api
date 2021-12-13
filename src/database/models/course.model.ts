@@ -17,10 +17,8 @@ const CourseEntity = new Schema<Course>({
     type: String,
     required: true,
   },
-  price: {
-    type: Number,
-    required: true,
-  },
+  username: String,
+  password: String,
 });
 
 export default model<Course>('Course', CourseEntity);

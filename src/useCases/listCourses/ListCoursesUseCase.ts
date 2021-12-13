@@ -1,4 +1,4 @@
-import Course from '../../entities/course.entity';
+import Course from '../../database/models/course.model';
 
 export class ListCoursesUseCase {
   async execute() {
