@@ -1,9 +1,12 @@
-import Course from '../../database/models/course.model'
+import { Course } from '../../entities/course.entity'
+import { ICoursesRepository } from '../../repositories/ICoursesRepository'
 
 export class ListCoursesUseCase {
-  async execute () {
-    const courses = await Course.find()
+  constructor (
+    private readonly mongoCoursesRepository: ICoursesRepository
+  ) {}
 
-    return { courses }
+  async execute (): Promise<Course[]> {
+    return await this.mongoCoursesRepository.findAll()
   }
 }
