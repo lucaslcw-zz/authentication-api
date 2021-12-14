@@ -7,7 +7,7 @@ export class MongoCoursesRepository implements ICoursesRepository {
     return await CourseModel.find()
   }
 
-  async create (course: Course): Promise<void> {
-    await CourseModel.create(course)
+  async create (course: Course): Promise<Course> {
+    return await CourseModel.create(course)
   }
 }
