@@ -14,7 +14,7 @@ export class AuthenticateUserController {
         userEmail,
         userPassword
       })
-      return response.status(200).json(token)
+      return response.status(200).json({ token })
     } catch (err: any) {
       return response.status(400).json({
         status: 'Error',

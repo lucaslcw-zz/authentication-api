@@ -10,7 +10,7 @@ export class AuthenticateUserUseCase {
     private readonly mongoUsersRepository: IUsersRepository
   ) {}
 
-  async execute ({ userEmail, userPassword }: IAuthenticateUserRequestDTO) {
+  async execute ({ userEmail, userPassword }: IAuthenticateUserRequestDTO): Promise<string> {
     const userAlreadyExists = await this.mongoUsersRepository.findByEmail(userEmail)
 
     if (!userAlreadyExists) {
@@ -28,6 +28,6 @@ export class AuthenticateUserUseCase {
       expiresIn: '30d'
     })
 
-    return { token }
+    return token
   }
 }
