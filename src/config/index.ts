@@ -1,9 +1,9 @@
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
 export const {
   JWT_PASS,
   MONGO_URL,
-  PORT,
-} = process.env;
+  PORT
+} = process.env

@@ -1,4 +1,4 @@
-import Course from '../../database/models/course.model';
+import Course from '../../database/models/course.model'
 
 interface ICreateCourseRequest {
   name: string;
@@ -6,10 +6,10 @@ interface ICreateCourseRequest {
 }
 
 export class CreateCourseUseCase {
-  async execute({ name, price }: ICreateCourseRequest): Promise<void> {
+  async execute ({ name, price }: ICreateCourseRequest): Promise<void> {
     await Course.create({
       name,
-      price,
-    });
+      price
+    })
   }
 }

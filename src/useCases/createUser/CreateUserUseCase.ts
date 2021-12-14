@@ -1,6 +1,6 @@
-import { hash } from 'bcryptjs';
+import { hash } from 'bcryptjs'
 
-import User from '../../database/models/user.model';
+import User from '../../database/models/user.model'
 
 interface ICreateUserRequest {
   name: string;
@@ -9,19 +9,19 @@ interface ICreateUserRequest {
 }
 
 export class CreateUserUseCase {
-  async execute({ name, username, password }: ICreateUserRequest): Promise<void> {
-    const userAlreadyExists = await User.findOne({ username });
+  async execute ({ name, username, password }: ICreateUserRequest): Promise<void> {
+    const userAlreadyExists = await User.findOne({ username })
 
     if (userAlreadyExists) {
-      throw new Error('User already exists!');
+      throw new Error('User already exists!')
     }
 
-    const passwordHash = await hash(password, 8);
+    const passwordHash = await hash(password, 8)
 
     await User.create({
       name,
       username,
-      password: passwordHash,
-    });
+      password: passwordHash
+    })
   }
 }

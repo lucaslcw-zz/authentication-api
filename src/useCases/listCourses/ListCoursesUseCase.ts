@@ -1,9 +1,9 @@
-import Course from '../../database/models/course.model';
+import Course from '../../database/models/course.model'
 
 export class ListCoursesUseCase {
-  async execute() {
-    const courses = await Course.find();
+  async execute () {
+    const courses = await Course.find()
 
-    return { courses };
+    return { courses }
   }
 }

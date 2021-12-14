@@ -1,25 +1,25 @@
-import { Request, Response } from 'express';
+import { Request, Response } from 'express'
 
-import { CreateCourseUseCase } from './CreateCourseUseCase';
+import { CreateCourseUseCase } from './CreateCourseUseCase'
 
 export class CreateCourseController {
-  async handle(request: Request, response: Response) {
-    const { name, price } = request.body;
+  async handle (request: Request, response: Response) {
+    const { name, price } = request.body
 
-    const createCourseUseCase = new CreateCourseUseCase();
+    const createCourseUseCase = new CreateCourseUseCase()
 
     try {
       await createCourseUseCase.execute({
         name,
-        price,
-      });
+        price
+      })
 
-      return response.status(200).json();
+      return response.status(200).json()
     } catch (err) {
       return response.status(400).json({
         status: 'Error',
-        message: err.message,
-      });
+        message: err.message
+      })
     }
   }
 }
