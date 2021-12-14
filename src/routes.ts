@@ -2,24 +2,26 @@ import { Router } from 'express'
 
 import { ensureAuthenticated } from './middlewares/ensureAuthenticated'
 
-import { AuthenticateUserController } from './useCases/authenticateUser/AuthenticateUserController'
-import { CreateUserController } from './useCases/createUser/CreateUserController'
+import AuthenticateUserFactory from './useCases/authenticateUser/AuthenticateUserFactory'
+import CreateUserFactory from './useCases/createUser/CreateUserFactory'
 
-import { ListCoursesController } from './useCases/listCourses/ListCoursesController'
-import { CreateCourseController } from './useCases/createCourse/CreateCourseController'
+import ListCoursesFactory from './useCases/listCourses/ListCoursesFactory'
+import CreateCourseFactory from './useCases/createCourse/CreateCourseFactory'
 
 const router = Router()
 
-const authenticateUserController = new AuthenticateUserController()
-const createUserController = new CreateUserController()
+router.post('/authenticateUser', (request, response) => {
+  return AuthenticateUserFactory().handle(request, response)
+})
+router.post('/createUser', (request, response) => {
+  return CreateUserFactory().handle(request, response)
+})
 
-const listCoursesController = new ListCoursesController()
-const createCourseController = new CreateCourseController()
-
-router.post('/login', authenticateUserController.handle)
-router.post('/users', createUserController.handle)
-
-router.get('/course', ensureAuthenticated, listCoursesController.handle)
-router.post('/course', ensureAuthenticated, createCourseController.handle)
+router.get('/listCourses', ensureAuthenticated, (request, response) => {
+  return ListCoursesFactory().handle(request, response)
+})
+router.post('/createCourse', ensureAuthenticated, (request, response) => {
+  return CreateCourseFactory().handle(request, response)
+})
 
 export { router }

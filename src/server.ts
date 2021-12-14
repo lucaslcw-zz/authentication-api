@@ -1,15 +1,8 @@
-import express, { Application } from 'express'
-
-import { MongoClient } from './database/MongoClient'
-import { router } from './routes'
+import { app } from './app'
 import { PORT } from './config'
 
-const port: string | number = PORT || 3000
-const app: Application = express()
+const port: string|number = PORT || 3000
 
-new MongoClient()
-
-app.use(express.json())
-app.use(router)
-
-app.listen(port)
+app.listen(port, () => {
+  console.log(`Server started in port ${port}`)
+})
