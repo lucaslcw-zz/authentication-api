@@ -1,27 +1,24 @@
 import { hash } from 'bcryptjs'
 
-import User from '../../database/models/user.model'
-
-interface ICreateUserRequest {
-  name: string;
-  username: string;
-  password: string;
-}
+import { User } from '../../entities/user.entity'
+import { IUsersRepository } from '../../repositories/IUsersRepository'
+import { ICreateUserRequestDTO } from './CreateUserDTO'
 
 export class CreateUserUseCase {
-  async execute ({ name, username, password }: ICreateUserRequest): Promise<void> {
-    const userAlreadyExists = await User.findOne({ username })
+  constructor (
+    private readonly mongoUsersRepository: IUsersRepository
+  ) {}
+
+  async execute (data: ICreateUserRequestDTO): Promise<void> {
+    const userAlreadyExists = await this.mongoUsersRepository.findByEmail(data.userEmail)
 
     if (userAlreadyExists) {
       throw new Error('User already exists!')
     }
 
-    const passwordHash = await hash(password, 8)
+    const hashPassword = await hash(data.userPassword, 8)
 
-    await User.create({
-      name,
-      username,
-      password: passwordHash
-    })
+    const user = new User({ ...data, userPassword: hashPassword })
+    await this.mongoUsersRepository.create(user)
   }
 }
