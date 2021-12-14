@@ -1,21 +1,21 @@
 import { Request, Response } from 'express'
-
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'
 
 export class AuthenticateUserController {
-  async handle (request: Request, response: Response) {
-    const { username, password } = request.body
+  constructor (
+    private readonly authenticateUserUseCase: AuthenticateUserUseCase
+  ) {}
 
-    const authenticateUserUseCase = new AuthenticateUserUseCase()
+  async handle (request: Request, response: Response) {
+    const { userEmail, userPassword } = request.body
 
     try {
-      const token = await authenticateUserUseCase.execute({
-        username,
-        password
+      const token = await this.authenticateUserUseCase.execute({
+        userEmail,
+        userPassword
       })
-
       return response.status(200).json(token)
-    } catch (err) {
+    } catch (err: any) {
       return response.status(400).json({
         status: 'Error',
         message: err.message
