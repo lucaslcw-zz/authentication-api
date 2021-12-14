@@ -3,20 +3,21 @@ import { Request, Response } from 'express'
 import { CreateUserUseCase } from './CreateUserUseCase'
 
 export class CreateUserController {
-  async handle (request: Request, response: Response) {
-    const { username, name, password } = request.body
+  constructor (
+    private readonly createUserUseCase: CreateUserUseCase
+  ) {}
 
-    const createUserUseCase = new CreateUserUseCase()
+  async handle (request: Request, response: Response) {
+    const { userName, userEmail, userPassword } = request.body
 
     try {
-      await createUserUseCase.execute({
-        username,
-        name,
-        password
+      await this.createUserUseCase.execute({
+        userName,
+        userEmail,
+        userPassword
       })
-
       return response.status(200).json()
-    } catch (err) {
+    } catch (err: any) {
       return response.status(400).json({
         status: 'Error',
         message: err.message
