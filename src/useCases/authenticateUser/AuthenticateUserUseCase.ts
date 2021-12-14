@@ -1,30 +1,30 @@
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 
-import User from '../../database/models/user.model'
 import { JWT_PASS } from '../../config'
-
-interface IAuthenticateUserRequest {
-  username: string;
-  password: string;
-}
+import { IAuthenticateUserRequestDTO } from './AuthenticateUserDTO'
+import { IUsersRepository } from '../../repositories/IUsersRepository'
 
 export class AuthenticateUserUseCase {
-  async execute ({ username, password }: IAuthenticateUserRequest) {
-    const userAlreadyExists = await User.findOne({ username })
+  constructor (
+    private readonly mongoUsersRepository: IUsersRepository
+  ) {}
+
+  async execute ({ userEmail, userPassword }: IAuthenticateUserRequestDTO) {
+    const userAlreadyExists = await this.mongoUsersRepository.findByEmail(userEmail)
 
     if (!userAlreadyExists) {
       throw new Error('User not already exists!')
     }
 
-    const passwordMatch = await compare(password, userAlreadyExists.password)
+    const passwordMatch = await compare(userPassword, userAlreadyExists.userPassword)
 
     if (!passwordMatch) {
       throw new Error('User or password incorrect!')
     }
 
     const token = sign({}, JWT_PASS as string, {
-      subject: userAlreadyExists.id,
+      subject: userAlreadyExists.userId,
       expiresIn: '30d'
     })
 
