@@ -17,9 +17,9 @@ export class AuthenticateUserUseCase {
       throw new Error('User not already exists!')
     }
 
-    const passwordMatch = await compare(userPassword, userAlreadyExists.userPassword)
+    const matchPassword = await compare(userPassword, userAlreadyExists.userPassword)
 
-    if (!passwordMatch) {
+    if (!matchPassword) {
       throw new Error('User or password incorrect!')
     }
 
